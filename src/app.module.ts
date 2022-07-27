@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Module, HttpModule, HttpService } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsService } from './products/services/products.service';
@@ -11,7 +12,16 @@ const API_KEY = '12323453';
 const API_KEY_PORD = 'PROD12746ys';
 
 @Module({
-  imports: [HttpModule, UsersModule, ProductsModule, DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+    HttpModule,
+    UsersModule,
+    ProductsModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
