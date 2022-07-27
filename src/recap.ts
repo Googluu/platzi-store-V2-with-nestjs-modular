@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const myName = 'Nicolas';
 const myAge = 12;
 const suma = (a: number, b: number) => {

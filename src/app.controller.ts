@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
