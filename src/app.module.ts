@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import { Module, HttpModule, HttpService } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsService } from './products/services/products.service';
@@ -10,7 +10,7 @@ const API_KEY = '12323453';
 const API_KEY_PORD = 'PROD12746ys';
 
 @Module({
-  imports: [UsersModule, ProductsModule],
+  imports: [HttpModule, UsersModule, ProductsModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -18,7 +18,17 @@ const API_KEY_PORD = 'PROD12746ys';
     {
       provide: 'API_KEY',
       useValue: process.env.NODE_ENV === 'prod' ? API_KEY_PORD : API_KEY, // $env:NODE_ENV = 'prod'; npm run start:dev
-    }
+    },
+    {
+      provide: 'TASKS',
+      useFactory: async (http: HttpService) => {
+        const tasks = await http
+          .get('https://jsonplaceholder.typicode.com/todos')
+          .toPromise();
+        return tasks.data;
+      },
+      inject: [HttpService],
+    },
   ],
 })
 export class AppModule {}
