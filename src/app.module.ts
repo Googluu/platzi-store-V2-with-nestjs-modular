@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
 
 import { enviroments } from './enviroments';
+import config from './config';
 
 const API_KEY = '12323453';
 const API_KEY_PORD = 'PROD12746ys';
@@ -17,6 +18,7 @@ const API_KEY_PORD = 'PROD12746ys';
   imports: [
     ConfigModule.forRoot({
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
+      load: [config],
       isGlobal: true,
     }),
     HttpModule,
