@@ -5,12 +5,13 @@ import { AppService } from './app.service';
 import { ProductsService } from './products/services/products.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { DatabaseModule } from './database/database.module';
 
 const API_KEY = '12323453';
 const API_KEY_PORD = 'PROD12746ys';
 
 @Module({
-  imports: [HttpModule, UsersModule, ProductsModule],
+  imports: [HttpModule, UsersModule, ProductsModule, DatabaseModule],
   controllers: [AppController],
   providers: [
     AppService,
